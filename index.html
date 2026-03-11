@@ -497,7 +497,23 @@
     if (!name) { err.textContent = "⚠️ Iltimos, ismingizni kiriting."; return; }
     if (!phone || phone.length < 9) { err.textContent = "⚠️ Iltimos, to'g'ri telefon raqam kiriting."; return; }
     err.textContent = '';
-    console.log("Yangi mijoz:", { name, phone });
+    // JSONP orqali yuborish (CORS muammosini hal qiladi)
+    await new Promise((resolve, reject) => {
+      const cbName = "cb_" + Date.now();
+      const script = document.createElement("script");
+      const url = "https://script.google.com/macros/s/AKfycbxLC-5tqiDCL60o6odZgTdCSjrDY7caVS2jGS_Ie3S_LFXHu1b2BAVZghZRabHqQJFW/exec"
+        + "?name=" + encodeURIComponent(name)
+        + "&phone=" + encodeURIComponent(phone)
+        + "&callback=" + cbName;
+      window[cbName] = (res) => {
+        delete window[cbName];
+        document.body.removeChild(script);
+        res.success ? resolve() : reject(res.error);
+      };
+      script.onerror = reject;
+      script.src = url;
+      document.body.appendChild(script);
+    });
     document.getElementById('form-view').style.display = 'none';
     document.getElementById('success-view').style.display = 'block';
   }
