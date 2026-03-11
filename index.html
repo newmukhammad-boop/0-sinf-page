@@ -146,7 +146,24 @@
   .photo-card .name { color: #fff; font-size: 13px; font-weight: 700; }
   .photo-card .age { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 4px; }
 
-  /* BUTTONS */
+  .hero-img-wrap {
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-img-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 45%;
+    background: linear-gradient(to bottom, transparent 0%, #275EF5 85%);
+    pointer-events: none;
+    border-radius: 0 0 4px 4px;
+  }
+  .hero-img {
+    width: min(420px, 90vw);
+    display: block;
+  }
   .btn-main {
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: #fff;
@@ -177,7 +194,13 @@
     80% { transform: translateY(-2px) rotate(1deg); }
   }
 
-  /* WHY SECTION */
+  /* WAVE DIVIDER */
+  .wave-divider {
+    display: block;
+    background: #275EF5;
+    line-height: 0;
+    margin-bottom: -2px;
+  }
   .why { background: #fff; padding: 80px 20px; text-align: center; }
   .section-label {
     color: #275EF5;
@@ -351,21 +374,19 @@
   <h1>Farzandingiz 1-sinfda — sinfdagi <span>ENG YAXSHI</span> o'quvchi bo'lsin!</h1>
   <p>Bizning maktabga tayyorlash sinflarimizda bolangiz o'qish, yozish, hisoblash va ijodiy fikrlashni o'rganadi. Professional o'qituvchilar, zamonaviy dastur.</p>
 
-  <div class="photos">
-    <div class="photo-card">
-      <div class="photo-avatar">👧</div>
-      <div class="name">Malika, 6 yosh</div>
-      <div class="age">"Maktabga borishni xohlayman!"</div>
-    </div>
-    <div class="photo-card">
-      <div class="photo-avatar">👦</div>
-      <div class="name">Doniyor, 6 yosh</div>
-      <div class="age">"Harf yozishni o'rgandim!"</div>
-    </div>
+  <div class="hero-img-wrap">
+    <img src="https://i.postimg.cc/QxYqWMkC/Untitled-design.webp" alt="O'quvchilar" class="hero-img" />
   </div>
 
   <button class="btn-main" onclick="openModal()">📞 Ma'lumot olish</button>
 </section>
+
+<!-- WAVE -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:80px;display:block;">
+    <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/>
+  </svg>
+</div>
 
 <!-- WHY -->
 <section class="why">
