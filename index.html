@@ -465,7 +465,16 @@
       </div>
       <div class="field">
         <label>📱 Telefon raqamingiz</label>
-        <input type="tel" id="inp-phone" placeholder="+998 90 000 00 00" />
+        <div style="display:flex; align-items:center; border:2px solid #e0e8ff; border-radius:12px; overflow:hidden; transition: border 0.2s;" id="phone-wrap">
+          <span style="padding: 14px 12px; background:#f4f7ff; font-size:1rem; border-right:2px solid #e0e8ff; white-space:nowrap;">🇺🇿 +998</span>
+          <input type="tel" id="inp-phone" placeholder="90 000 00 00"
+            style="border:none; border-radius:0; flex:1; padding:14px 12px; font-size:1rem; outline:none; font-family:'Merriweather',Georgia,serif;"
+            maxlength="12"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,9)"
+            onfocus="document.getElementById('phone-wrap').style.borderColor='#275EF5'"
+            onblur="document.getElementById('phone-wrap').style.borderColor='#e0e8ff'"
+          />
+        </div>
       </div>
       <div id="form-error"></div>
       <button class="btn-submit" onclick="submitForm()">✅ Yuborish</button>
@@ -492,10 +501,10 @@
 
   async function submitForm() {
     const name = document.getElementById('inp-name').value.trim();
-    const phone = document.getElementById('inp-phone').value.trim();
+    const phone = "+998" + document.getElementById('inp-phone').value.trim();
     const err = document.getElementById('form-error');
     if (!name) { err.textContent = "⚠️ Iltimos, ismingizni kiriting."; return; }
-    if (!phone || phone.length < 9) { err.textContent = "⚠️ Iltimos, to'g'ri telefon raqam kiriting."; return; }
+    if (phone.length < 13) { err.textContent = "⚠️ Iltimos, to'liq telefon raqam kiriting."; return; }
     err.textContent = '';
     // JSONP orqali yuborish (CORS muammosini hal qiladi)
     await new Promise((resolve, reject) => {
