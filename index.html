@@ -45,9 +45,7 @@
     border-radius: 50%;
     top: -120px; left: -120px;
   }
-  .hero::after {
-    content: none;
-  }
+  .hero::after { content: none; }
 
   /* ANNOUNCEMENT */
   .announcement {
@@ -321,9 +319,45 @@
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: #fff; border: none; border-radius: 12px; font-size: 1rem;
     font-weight: 700; font-family: 'Merriweather', Georgia, serif;
-    cursor: pointer; margin-top: 6px; transition: all 0.2s;
+    cursor: pointer; margin-top: 6px;
+    transition: background 0.3s, opacity 0.3s, transform 0.15s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
   }
-  .btn-submit:hover { opacity: 0.9; }
+  .btn-submit:hover:not(:disabled) { opacity: 0.9; }
+
+  /* LOADING STATE */
+  .btn-submit.loading {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn-submit:disabled { cursor: not-allowed; }
+
+  /* Spinner */
+  .spinner {
+    width: 18px; height: 18px;
+    border: 3px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+    display: none;
+  }
+  .btn-submit.loading .spinner { display: block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Dots pulsing for text */
+  .loading-dots::after {
+    content: '';
+    animation: dots 1.2s steps(3, end) infinite;
+  }
+  @keyframes dots {
+    0%   { content: ''; }
+    33%  { content: '.'; }
+    66%  { content: '..'; }
+    100% { content: '...'; }
+  }
+
   #form-error { color: #e74c3c; font-size: 0.83rem; margin-top: -8px; margin-bottom: 8px; min-height: 18px; }
 
   /* MOBILE */
@@ -477,7 +511,10 @@
         </div>
       </div>
       <div id="form-error"></div>
-      <button class="btn-submit" id="submit-btn" onclick="submitForm()">✅ Yuborish</button>
+      <button class="btn-submit" id="submit-btn" onclick="submitForm()">
+        <div class="spinner" id="spinner"></div>
+        <span id="btn-text">✅ Yuborish</span>
+      </button>
     </div>
 
     <div id="success-view" style="display:none; text-align:center; padding: 10px 0;">
@@ -499,32 +536,59 @@
   }
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+  function setLoading(isLoading) {
+    const btn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+
+    if (isLoading) {
+      btn.classList.add('loading');
+      btn.disabled = true;
+      btnText.innerHTML = '<span class="loading-dots">Yuborilmoqda</span>';
+    } else {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      btnText.textContent = '✅ Yuborish';
+    }
+  }
+
   async function submitForm() {
     const name = document.getElementById('inp-name').value.trim();
     const phone = "+998" + document.getElementById('inp-phone').value.trim();
     const err = document.getElementById('form-error');
+
     if (!name) { err.textContent = "⚠️ Iltimos, ismingizni kiriting."; return; }
     if (phone.length < 13) { err.textContent = "⚠️ Iltimos, to'liq telefon raqam kiriting."; return; }
     err.textContent = '';
-    // JSONP orqali yuborish (CORS muammosini hal qiladi)
-    await new Promise((resolve, reject) => {
-      const cbName = "cb_" + Date.now();
-      const script = document.createElement("script");
-      const url = "https://script.google.com/macros/s/AKfycbxLC-5tqiDCL60o6odZgTdCSjrDY7caVS2jGS_Ie3S_LFXHu1b2BAVZghZRabHqQJFW/exec"
-        + "?name=" + encodeURIComponent(name)
-        + "&phone=" + encodeURIComponent(phone)
-        + "&callback=" + cbName;
-      window[cbName] = (res) => {
-        delete window[cbName];
-        document.body.removeChild(script);
-        res.success ? resolve() : reject(res.error);
-      };
-      script.onerror = reject;
-      script.src = url;
-      document.body.appendChild(script);
-    });
-    document.getElementById('form-view').style.display = 'none';
-    document.getElementById('success-view').style.display = 'block';
+
+    // Immediately show loading state
+    setLoading(true);
+
+    try {
+      await new Promise((resolve, reject) => {
+        const cbName = "cb_" + Date.now();
+        const script = document.createElement("script");
+        const url = "https://script.google.com/macros/s/AKfycbxLC-5tqiDCL60o6odZgTdCSjrDY7caVS2jGS_Ie3S_LFXHu1b2BAVZghZRabHqQJFW/exec"
+          + "?name=" + encodeURIComponent(name)
+          + "&phone=" + encodeURIComponent(phone)
+          + "&callback=" + cbName;
+        window[cbName] = (res) => {
+          delete window[cbName];
+          document.body.removeChild(script);
+          res.success ? resolve() : reject(res.error);
+        };
+        script.onerror = reject;
+        script.src = url;
+        document.body.appendChild(script);
+      });
+
+      // Success
+      document.getElementById('form-view').style.display = 'none';
+      document.getElementById('success-view').style.display = 'block';
+    } catch (e) {
+      // Error — restore button
+      setLoading(false);
+      err.textContent = "⚠️ Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.";
+    }
   }
 
   function closeModal() {
@@ -536,6 +600,7 @@
       document.getElementById('inp-name').value = '';
       document.getElementById('inp-phone').value = '';
       document.getElementById('form-error').textContent = '';
+      setLoading(false);
     }, 300);
   }
 </script>
