@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maktabga Tayyorlash Sinflari</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ANNOUNCEMENT */
+  .announcement {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 220, 0, 0.15);
+    border: 2px solid #FFD700;
+    border-radius: 50px;
+    padding: 10px 24px;
+    margin-bottom: 28px;
+    animation: pulse-border 1.5s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,215,0,0.5); border-color: #FFD700; }
+    50% { box-shadow: 0 0 0 8px rgba(255,215,0,0); border-color: #fff700; }
+  }
+  .announcement .dot {
+    width: 10px; height: 10px;
+    background: #FFD700;
+    border-radius: 50%;
+    animation: blink 1s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.7); }
+  }
+  .announcement span {
+    color: #FFD700;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: 'Merriweather', Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Merriweather', Georgia, serif; color: #1a1a2e; overflow-x: hidden; }
+
+  /* HERO */
+  .hero {
+    background: #275EF5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+    top: -120px; left: -120px;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+    bottom: -80px; right: -80px;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 24px;
+    background: #275EF5;
+  }
+  .navbar img {
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 12px rgba(0,0,0,0.18));
+    transition: transform 0.3s;
+  }
+  .navbar img:hover { transform: scale(1.05); }
+
+  .badge {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 50px;
+    padding: 8px 22px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    max-width: 700px;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: #FFD700; }
+
+  .hero p {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: rgba(255,255,255,0.88);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  /* STUDENT PHOTOS */
+  .photos {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .photo-card {
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 12px;
+    text-align: center;
+    width: 160px;
+    transition: transform 0.3s;
+  }
+  .photo-card:hover { transform: translateY(-6px); }
+  .photo-avatar {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    background: rgba(255,255,255,0.15);
+  }
+  .photo-card .name { color: #fff; font-size: 13px; font-weight: 600; }
+  .photo-card .age { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 2px; }
+
+  /* CTA BUTTON */
+  .btn-main {
+    background: #fff;
+    color: #275EF5;
+    border: none;
+    padding: 18px 44px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-main:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.2);
+    background: #f0f4ff;
+  }
+
+  /* WHY SECTION */
+  .why {
+    background: #fff;
+    padding: 80px 20px;
+    text-align: center;
+  }
+  .section-label {
+    color: #275EF5;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .why h2 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    color: #1a1a2e;
+    max-width: 560px;
+    margin: 0 auto 50px;
+    line-height: 1.3;
+  }
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #f4f7ff;
+    border-radius: 20px;
+    padding: 32px 28px;
+    width: 280px;
+    box-shadow: 0 4px 20px rgba(39,94,245,0.07);
+    transition: all 0.3s;
+    text-align: left;
+    border-top: 4px solid transparent;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(39,94,245,0.14);
+    border-top-color: #275EF5;
+  }
+  .card .icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+  .card h3 { font-size: 1.05rem; font-weight: 700; color: #1a1a2e; margin-bottom: 10px; }
+  .card p { font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+  /* STATS */
+  .stats {
+    background: #275EF5;
+    padding: 60px 20px;
+    text-align: center;
+  }
+  .stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .stat { color: #fff; }
+  .stat .num { font-size: 3rem; font-weight: 900; color: #FFD700; display: block; }
+  .stat .label { font-size: 0.95rem; opacity: 0.85; margin-top: 4px; }
+
+  /* FOOTER CTA */
+  .footer-cta {
+    background: #fff;
+    padding: 80px 20px;
+    text-align: center;
+    border-top: 1px solid #e8eeff;
+  }
+  .footer-cta h2 {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800;
+    color: #1a1a2e;
+    margin-bottom: 14px;
+  }
+  .footer-cta p { color: #777; margin-bottom: 36px; font-size: 1rem; }
+
+  .btn-blue {
+    background: #275EF5;
+    color: #fff;
+    border: none;
+    padding: 18px 44px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(39,94,245,0.3);
+    transition: all 0.3s;
+  }
+  .btn-blue:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(39,94,245,0.4);
+    background: #1a4de0;
+  }
+
+  .footer { background: #275EF5; color: rgba(255,255,255,0.5); text-align: center; padding: 20px; font-size: 13px; }
+
+  @media (max-width: 600px) {
+    .navbar img { height: 72px; }
+    .hero { padding: 36px 18px 48px; }
+    .hero h1 { font-size: 1.55rem; }
+    .hero p { font-size: 0.95rem; }
+    .announcement span { font-size: 0.82rem; }
+    .announcement { padding: 8px 16px; }
+    .btn-main, .btn-blue { padding: 16px 28px; font-size: 0.95rem; width: 100%; }
+    .photos { gap: 12px; }
+    .photo-card { width: 140px; }
+    .why { padding: 50px 16px; }
+    .why h2 { font-size: 1.35rem; }
+    .cards { gap: 16px; }
+    .card { width: 100%; padding: 24px 20px; }
+    .stats { padding: 44px 16px; }
+    .stats-grid { gap: 28px; }
+    .stat .num { font-size: 2.2rem; }
+    .stat .label { font-size: 0.82rem; }
+    .footer-cta { padding: 50px 18px; }
+    .footer-cta h2 { font-size: 1.35rem; }
+    .modal { padding: 32px 22px; border-radius: 18px; }
+    .modal h3 { font-size: 1.2rem; }
+    .field input { font-size: 0.95rem; padding: 13px 14px; }
+    .btn-submit { font-size: 0.95rem; }
+  }
+
+  /* MODAL */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(39,94,245,0.18);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  .overlay.active { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 24px;
+    padding: 44px 36px;
+    max-width: 420px;
+    width: 90%;
+    position: relative;
+    animation: popIn 0.3s ease;
+    text-align: center;
+    border-top: 5px solid #275EF5;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #aaa;
+    background: none;
+    border: none;
+    line-height: 1;
+  }
+  .modal-close:hover { color: #275EF5; }
+  .modal-icon { font-size: 3rem; margin-bottom: 12px; }
+  .modal h3 { font-size: 1.5rem; font-weight: 800; color: #1a1a2e; margin-bottom: 8px; }
+  .modal .sub { color: #888; font-size: 0.9rem; margin-bottom: 28px; }
+
+  .field { text-align: left; margin-bottom: 16px; }
+  .field label { display: block; font-size: 0.85rem; font-weight: 700; color: #555; margin-bottom: 6px; }
+  .field input {
+    width: 100%; padding: 14px 16px;
+    border: 2px solid #e0e8ff;
+    border-radius: 12px; font-size: 1rem; outline: none;
+    transition: border 0.2s; font-family: inherit;
+  }
+  .field input:focus { border-color: #275EF5; }
+  .btn-submit {
+    width: 100%; padding: 15px;
+    background: #275EF5;
+    color: #fff; border: none; border-radius: 12px; font-size: 1rem;
+    font-weight: 700; cursor: pointer; margin-top: 6px; transition: all 0.2s;
+  }
+  .btn-submit:hover { background: #1a4de0; }
+  #form-error { color: #e74c3c; font-size: 0.83rem; margin-top: -8px; margin-bottom: 8px; min-height: 18px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <img src="https://i.postimg.cc/mkSDvhVZ/1.png" alt="Maktab logosi" />
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="announcement">
+    <div class="dot"></div>
+    <span>🎓 Qabul boshlandi!</span>
+  </div>
+  <h1>Farzandingiz 1-sinfda — sinfdagi <span>ENG YAXSHI</span> o'quvchi bo'lsin!</h1>
+  <p>Bizning maktabga tayyorlash sinflarimizda bolangiz o'qish, yozish, hisoblash va ijodiy fikrlashni o'rganadi. Professional o'qituvchilar, zamonaviy dastur.</p>
+
+  <div class="photos">
+    <div class="photo-card">
+      <div class="photo-avatar">👧</div>
+      <div class="name">Malika, 6 yosh</div>
+      <div class="age">"Maktabga borishni xohlayman!"</div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-avatar">👦</div>
+      <div class="name">Doniyor, 6 yosh</div>
+      <div class="age">"Harf yozishni o'rgandim!"</div>
+    </div>
+  </div>
+
+  <button class="btn-main" onclick="openModal()">📞 Ma'lumot olish</button>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="section-label">✨ Nima uchun biz?</div>
+  <h2>Nega farzandingiz bizning sinfimizda o'qishi kerak?</h2>
+  <div class="cards">
+    <div class="card">
+      <span class="icon">📚</span>
+      <h3>Kuchli dastur</h3>
+      <p>O'qish, yozish, matematika va mantiqiy fikrlash — zamonaviy davlat standartlariga mos dastur.</p>
+    </div>
+    <div class="card">
+      <span class="icon">👩‍🏫</span>
+      <h3>Tajribali o'qituvchilar</h3>
+      <p>10+ yillik tajribaga ega, bolalarni sevadigan va individual yondashadigan mutaxassislar.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🎨</span>
+      <h3>Ijodiy muhit</h3>
+      <p>O'yin orqali o'rganish metodi — bola maktabga ketishdan quvonadi, qo'rqmaydi.</p>
+    </div>
+    <div class="card">
+      <span class="icon">👨‍👩‍👧</span>
+      <h3>Ota-onalar bilan aloqa</h3>
+      <p>Har hafta hisobot, ota-onalar bilan yaqin hamkorlik va doimiy xabardorlik.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🏆</span>
+      <h3>Natija kafolati</h3>
+      <p>O'quvchilarimizning 95% 1-sinfga yuqori tayyorgarlik bilan boradi.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🕐</span>
+      <h3>Qulay kun tartibi</h3>
+      <p>Ertalab ishga ketayotganda bolangizni bizga topshiring — kechki payt qaytayotganda sog'-salomat, bilimli holda olib keting.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🏇</span>
+      <h3>Sport to'garaklari</h3>
+      <p>Ot sporti, suzish, shaxmat — farzandingiz jismoniy va aqliy jihatdan har tomonlama rivojlanadi.</p>
+    </div>
+    <div class="card">
+      <span class="icon">🍽️</span>
+      <h3>3 mahal issiq ovqat</h3>
+      <p>Maxsus dietolog retsepti asosida tayyorlangan sog'lom va mazali ovqat — kun davomida to'liq oziqlanish.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat"><span class="num">800+</span><div class="label">Ota-onalar Farg'onada bizni tanlashdi</div></div>
+    <div class="stat"><span class="num">12+</span><div class="label">Yillik tajriba</div></div>
+    <div class="stat"><span class="num">95%</span><div class="label">Muvaffaqiyat darajasi</div></div>
+    <div class="stat"><span class="num">20–22</span><div class="label">Guruhda o'quvchi soni</div></div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <h2>Bugun o'rningizni band qiling! 🎒</h2>
+  <p>O'rinlar cheklangan — kechiktirmang. Bepul maslahat uchun hoziroq bog'laning.</p>
+  <button class="btn-blue" onclick="openModal()">📞 Ma'lumot olish — Bepul</button>
+</section>
+
+<div class="footer">© 2025 Xususiy Maktab — Maktabga Tayyorlash Sinflari. Barcha huquqlar himoyalangan.</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeOnBg(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div id="form-view">
+      <div class="modal-icon">📋</div>
+      <h3>Ma'lumot qoldiring</h3>
+      <p class="sub">Tez orada siz bilan bog'lanamiz!</p>
+
+      <div class="field">
+        <label>👤 Ismingiz</label>
+        <input type="text" id="inp-name" placeholder="Masalan: Dilnoza Karimova" />
+      </div>
+      <div class="field">
+        <label>📱 Telefon raqamingiz</label>
+        <input type="tel" id="inp-phone" placeholder="+998 90 000 00 00" />
+      </div>
+      <div id="form-error"></div>
+      <button class="btn-submit" onclick="submitForm()">✅ Yuborish</button>
+    </div>
+
+    <div id="success-view" style="display:none; text-align:center; padding: 10px 0;">
+      <div style="font-size:3.5rem; margin-bottom:14px;">🎉</div>
+      <h3 style="font-size:1.4rem; font-weight:800; color:#1a1a2e; margin-bottom:10px;">Rahmat!</h3>
+      <p style="color:#666; font-size:0.95rem; line-height:1.6;">Ma'lumotlaringiz qabul qilindi.<br>Tez orada siz bilan bog'lanamiz!</p>
+      <button class="btn-submit" style="margin-top:24px;" onclick="closeModal()">Yopish</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeOnBg(e) {
+    if (e.target === document.getElementById('overlay')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function submitForm() {
+    const name = document.getElementById('inp-name').value.trim();
+    const phone = document.getElementById('inp-phone').value.trim();
+    const err = document.getElementById('form-error');
+    if (!name) { err.textContent = "⚠️ Iltimos, ismingizni kiriting."; return; }
+    if (!phone || phone.length < 9) { err.textContent = "⚠️ Iltimos, to'g'ri telefon raqam kiriting."; return; }
+    err.textContent = '';
+    console.log("Yangi mijoz:", { name, phone });
+    document.getElementById('form-view').style.display = 'none';
+    document.getElementById('success-view').style.display = 'block';
+  }
+
+  function closeModal() {
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      document.getElementById('form-view').style.display = 'block';
+      document.getElementById('success-view').style.display = 'none';
+      document.getElementById('inp-name').value = '';
+      document.getElementById('inp-phone').value = '';
+      document.getElementById('form-error').textContent = '';
+    }, 300);
+  }
+</script>
+</body>
+</html>
