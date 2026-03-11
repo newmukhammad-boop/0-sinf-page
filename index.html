@@ -6,16 +6,64 @@
 <title>Maktabga Tayyorlash Sinflari</title>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Merriweather', Georgia, serif; color: #1a1a2e; overflow-x: hidden; }
+
+  /* NAVBAR */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    background: #275EF5;
+  }
+  .navbar img {
+    height: 320px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 12px rgba(0,0,0,0.18));
+    transition: transform 0.3s;
+  }
+  .navbar img:hover { transform: scale(1.05); }
+
+  /* HERO */
+  .hero {
+    background: #275EF5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 20px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+    top: -120px; left: -120px;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+    bottom: -80px; right: -80px;
+  }
+
   /* ANNOUNCEMENT */
   .announcement {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: rgba(255, 220, 0, 0.15);
+    background: rgba(255,220,0,0.15);
     border: 2px solid #FFD700;
     border-radius: 50px;
     padding: 10px 24px;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     animation: pulse-border 1.5s ease-in-out infinite;
     position: relative;
     z-index: 1;
@@ -40,86 +88,28 @@
     font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 0.5px;
-    font-family: 'Merriweather', Georgia, serif;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Merriweather', Georgia, serif; color: #1a1a2e; overflow-x: hidden; }
-
-  /* HERO */
-  .hero {
-    background: #275EF5;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    width: 500px; height: 500px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 50%;
-    top: -120px; left: -120px;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    width: 400px; height: 400px;
-    background: rgba(255,255,255,0.06);
-    border-radius: 50%;
-    bottom: -80px; right: -80px;
-  }
-
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 24px;
-    background: #275EF5;
-  }
-  .navbar img {
-    height: 320px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 12px rgba(0,0,0,0.18));
-    transition: transform 0.3s;
-  }
-  .navbar img:hover { transform: scale(1.05); }
-
-  .badge {
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.35);
-    border-radius: 50px;
-    padding: 8px 22px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    display: inline-block;
   }
 
   .hero h1 {
     font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
+    font-weight: 900;
     color: #fff;
     line-height: 1.2;
     max-width: 700px;
     margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
   }
   .hero h1 span { color: #FFD700; }
 
   .hero p {
-    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
     color: rgba(255,255,255,0.88);
     max-width: 520px;
     line-height: 1.7;
     margin-bottom: 36px;
+    position: relative;
+    z-index: 1;
   }
 
   /* STUDENT PHOTOS */
@@ -129,6 +119,8 @@
     justify-content: center;
     margin-bottom: 40px;
     flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
   }
   .photo-card {
     background: rgba(255,255,255,0.12);
@@ -151,9 +143,10 @@
     font-size: 48px;
     background: rgba(255,255,255,0.15);
   }
-  .photo-card .name { color: #fff; font-size: 13px; font-weight: 600; }
-  .photo-card .age { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 2px; }
+  .photo-card .name { color: #fff; font-size: 13px; font-weight: 700; }
+  .photo-card .age { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 4px; }
 
+  /* BUTTONS */
   .btn-main {
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: #fff;
@@ -185,11 +178,7 @@
   }
 
   /* WHY SECTION */
-  .why {
-    background: #fff;
-    padding: 80px 20px;
-    text-align: center;
-  }
+  .why { background: #fff; padding: 80px 20px; text-align: center; }
   .section-label {
     color: #275EF5;
     font-size: 13px;
@@ -200,7 +189,7 @@
   }
   .why h2 {
     font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 800;
+    font-weight: 900;
     color: #1a1a2e;
     max-width: 560px;
     margin: 0 auto 50px;
@@ -234,11 +223,7 @@
   .card p { font-size: 0.9rem; color: #555; line-height: 1.6; }
 
   /* STATS */
-  .stats {
-    background: #275EF5;
-    padding: 60px 20px;
-    text-align: center;
-  }
+  .stats { background: #275EF5; padding: 60px 20px; text-align: center; }
   .stats-grid {
     display: flex;
     flex-wrap: wrap;
@@ -258,59 +243,10 @@
     text-align: center;
     border-top: 1px solid #e8eeff;
   }
-  .footer-cta h2 {
-    font-size: clamp(1.6rem, 4vw, 2.2rem);
-    font-weight: 800;
-    color: #1a1a2e;
-    margin-bottom: 14px;
-  }
+  .footer-cta h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900; color: #1a1a2e; margin-bottom: 14px; }
   .footer-cta p { color: #777; margin-bottom: 36px; font-size: 1rem; }
 
-  .btn-blue {
-    background: #275EF5;
-    color: #fff;
-    border: none;
-    padding: 18px 44px;
-    font-size: 1.1rem;
-    font-weight: 800;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 8px 30px rgba(39,94,245,0.3);
-    transition: all 0.3s;
-  }
-  .btn-blue:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(39,94,245,0.4);
-    background: #1a4de0;
-  }
-
   .footer { background: #275EF5; color: rgba(255,255,255,0.5); text-align: center; padding: 20px; font-size: 13px; }
-
-  @media (max-width: 600px) {
-    .navbar img { height: 200px; }
-    .hero { padding: 36px 18px 48px; }
-    .hero h1 { font-size: 1.55rem; }
-    .hero p { font-size: 0.95rem; }
-    .announcement span { font-size: 0.82rem; }
-    .announcement { padding: 8px 16px; }
-    .btn-main, .btn-blue { padding: 16px 28px; font-size: 0.95rem; width: 100%; }
-    .photos { gap: 12px; }
-    .photo-card { width: 140px; }
-    .why { padding: 50px 16px; }
-    .why h2 { font-size: 1.35rem; }
-    .cards { gap: 16px; }
-    .card { width: 100%; padding: 24px 20px; }
-    .stats { padding: 44px 16px; }
-    .stats-grid { gap: 28px; }
-    .stat .num { font-size: 2.2rem; }
-    .stat .label { font-size: 0.82rem; }
-    .footer-cta { padding: 50px 18px; }
-    .footer-cta h2 { font-size: 1.35rem; }
-    .modal { padding: 32px 22px; border-radius: 18px; }
-    .modal h3 { font-size: 1.2rem; }
-    .field input { font-size: 0.95rem; padding: 13px 14px; }
-    .btn-submit { font-size: 0.95rem; }
-  }
 
   /* MODAL */
   .overlay {
@@ -353,24 +289,50 @@
   .modal-icon { font-size: 3rem; margin-bottom: 12px; }
   .modal h3 { font-size: 1.5rem; font-weight: 800; color: #1a1a2e; margin-bottom: 8px; }
   .modal .sub { color: #888; font-size: 0.9rem; margin-bottom: 28px; }
-
   .field { text-align: left; margin-bottom: 16px; }
   .field label { display: block; font-size: 0.85rem; font-weight: 700; color: #555; margin-bottom: 6px; }
   .field input {
     width: 100%; padding: 14px 16px;
     border: 2px solid #e0e8ff;
     border-radius: 12px; font-size: 1rem; outline: none;
-    transition: border 0.2s; font-family: inherit;
+    transition: border 0.2s; font-family: 'Merriweather', Georgia, serif;
   }
   .field input:focus { border-color: #275EF5; }
   .btn-submit {
     width: 100%; padding: 15px;
-    background: #275EF5;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
     color: #fff; border: none; border-radius: 12px; font-size: 1rem;
-    font-weight: 700; cursor: pointer; margin-top: 6px; transition: all 0.2s;
+    font-weight: 700; font-family: 'Merriweather', Georgia, serif;
+    cursor: pointer; margin-top: 6px; transition: all 0.2s;
   }
-  .btn-submit:hover { background: #1a4de0; }
+  .btn-submit:hover { opacity: 0.9; }
   #form-error { color: #e74c3c; font-size: 0.83rem; margin-top: -8px; margin-bottom: 8px; min-height: 18px; }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .navbar img { height: 200px; }
+    .hero { padding: 16px 18px 48px; }
+    .hero h1 { font-size: 1.55rem; }
+    .hero p { font-size: 0.92rem; }
+    .announcement span { font-size: 0.82rem; }
+    .announcement { padding: 8px 16px; }
+    .btn-main { padding: 16px 28px; font-size: 0.95rem; width: 100%; }
+    .photos { gap: 12px; }
+    .photo-card { width: 140px; }
+    .why { padding: 50px 16px; }
+    .why h2 { font-size: 1.35rem; }
+    .cards { gap: 16px; }
+    .card { width: 100%; padding: 24px 20px; }
+    .stats { padding: 44px 16px; }
+    .stats-grid { gap: 28px; }
+    .stat .num { font-size: 2.2rem; }
+    .stat .label { font-size: 0.82rem; }
+    .footer-cta { padding: 50px 18px; }
+    .footer-cta h2 { font-size: 1.35rem; }
+    .modal { padding: 32px 22px; border-radius: 18px; }
+    .modal h3 { font-size: 1.2rem; }
+    .field input { font-size: 0.95rem; padding: 13px 14px; }
+  }
 </style>
 </head>
 <body>
@@ -467,7 +429,7 @@
 <section class="footer-cta">
   <h2>Bugun o'rningizni band qiling! 🎒</h2>
   <p>O'rinlar cheklangan — kechiktirmang. Bepul maslahat uchun hoziroq bog'laning.</p>
-  <button class="btn-blue" onclick="openModal()">📞 Ma'lumot olish — Bepul</button>
+  <button class="btn-main" onclick="openModal()">📞 Ma'lumot olish</button>
 </section>
 
 <div class="footer">© 2026 Registon Xususiy Maktabi — Maktabga Tayyorlash Sinflari. Barcha huquqlar himoyalangan.</div>
@@ -481,7 +443,6 @@
       <div class="modal-icon">📋</div>
       <h3>Ma'lumot qoldiring</h3>
       <p class="sub">Tez orada siz bilan bog'lanamiz!</p>
-
       <div class="field">
         <label>👤 Ismingiz</label>
         <input type="text" id="inp-name" placeholder="Masalan: Dilnoza Karimova" />
