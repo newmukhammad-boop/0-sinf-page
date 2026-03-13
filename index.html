@@ -45,7 +45,6 @@
     border-radius: 50%;
     top: -120px; left: -120px;
   }
-  .hero::after { content: none; }
 
   /* ANNOUNCEMENT */
   .announcement {
@@ -105,40 +104,6 @@
     z-index: 1;
   }
 
-  /* STUDENT PHOTOS */
-  .photos {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-  .photo-card {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.25);
-    border-radius: 20px;
-    padding: 12px;
-    text-align: center;
-    width: 160px;
-    transition: transform 0.3s;
-  }
-  .photo-card:hover { transform: translateY(-6px); }
-  .photo-avatar {
-    width: 100px; height: 100px;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    background: rgba(255,255,255,0.15);
-  }
-  .photo-card .name { color: #fff; font-size: 13px; font-weight: 700; }
-  .photo-card .age { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 4px; }
-
   .hero-img-wrap {
     margin-bottom: 36px;
     position: relative;
@@ -157,6 +122,7 @@
     width: min(420px, 90vw);
     display: block;
   }
+
   .btn-main {
     background: linear-gradient(135deg, #22c55e, #16a34a);
     color: #fff;
@@ -186,83 +152,6 @@
     60% { transform: translateY(-2px) rotate(-1deg); }
     80% { transform: translateY(-2px) rotate(1deg); }
   }
-
-  /* WAVE DIVIDER */
-  .wave-divider {
-    display: block;
-    background: #275EF5;
-    line-height: 0;
-    margin-bottom: -2px;
-  }
-  .why { background: #fff; padding: 80px 20px; text-align: center; }
-  .section-label {
-    color: #275EF5;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .why h2 {
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    font-weight: 900;
-    color: #1a1a2e;
-    max-width: 560px;
-    margin: 0 auto 50px;
-    line-height: 1.3;
-  }
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: center;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  .card {
-    background: #f4f7ff;
-    border-radius: 20px;
-    padding: 32px 28px;
-    width: 280px;
-    box-shadow: 0 4px 20px rgba(39,94,245,0.07);
-    transition: all 0.3s;
-    text-align: left;
-    border-top: 4px solid transparent;
-  }
-  .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 36px rgba(39,94,245,0.14);
-    border-top-color: #275EF5;
-  }
-  .card .icon { font-size: 2.4rem; margin-bottom: 16px; display: block; }
-  .card h3 { font-size: 1.05rem; font-weight: 700; color: #1a1a2e; margin-bottom: 10px; }
-  .card p { font-size: 0.9rem; color: #555; line-height: 1.6; }
-
-  /* STATS */
-  .stats { background: #275EF5; padding: 60px 20px; text-align: center; }
-  .stats-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .stat { color: #fff; }
-  .stat .num { font-size: 3rem; font-weight: 900; color: #FFD700; display: block; }
-  .stat .label { font-size: 0.95rem; opacity: 0.85; margin-top: 4px; }
-
-  /* FOOTER CTA */
-  .footer-cta {
-    background: #fff;
-    padding: 80px 20px;
-    text-align: center;
-    border-top: 1px solid #e8eeff;
-  }
-  .footer-cta h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 900; color: #1a1a2e; margin-bottom: 14px; }
-  .footer-cta p { color: #777; margin-bottom: 36px; font-size: 1rem; }
-
-  .footer { background: #275EF5; color: rgba(255,255,255,0.5); text-align: center; padding: 20px; font-size: 13px; }
 
   /* MODAL */
   .overlay {
@@ -324,16 +213,11 @@
     display: flex; align-items: center; justify-content: center; gap: 10px;
   }
   .btn-submit:hover:not(:disabled) { opacity: 0.9; }
-
-  /* LOADING STATE */
   .btn-submit.loading {
     background: linear-gradient(135deg, #f59e0b, #d97706);
     cursor: not-allowed;
-    transform: none;
   }
   .btn-submit:disabled { cursor: not-allowed; }
-
-  /* Spinner */
   .spinner {
     width: 18px; height: 18px;
     border: 3px solid rgba(255,255,255,0.4);
@@ -345,8 +229,6 @@
   }
   .btn-submit.loading .spinner { display: block; }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* Dots pulsing for text */
   .loading-dots::after {
     content: '';
     animation: dots 1.2s steps(3, end) infinite;
@@ -357,7 +239,6 @@
     66%  { content: '..'; }
     100% { content: '...'; }
   }
-
   #form-error { color: #e74c3c; font-size: 0.83rem; margin-top: -8px; margin-bottom: 8px; min-height: 18px; }
 
   /* MOBILE */
@@ -369,18 +250,6 @@
     .announcement span { font-size: 0.82rem; }
     .announcement { padding: 8px 16px; }
     .btn-main { padding: 16px 28px; font-size: 0.95rem; width: 100%; }
-    .photos { gap: 12px; }
-    .photo-card { width: 140px; }
-    .why { padding: 50px 16px; }
-    .why h2 { font-size: 1.35rem; }
-    .cards { gap: 16px; }
-    .card { width: 100%; padding: 24px 20px; }
-    .stats { padding: 44px 16px; }
-    .stats-grid { gap: 28px; }
-    .stat .num { font-size: 2.2rem; }
-    .stat .label { font-size: 0.82rem; }
-    .footer-cta { padding: 50px 18px; }
-    .footer-cta h2 { font-size: 1.35rem; }
     .modal { padding: 32px 22px; border-radius: 18px; }
     .modal h3 { font-size: 1.2rem; }
     .field input { font-size: 0.95rem; padding: 13px 14px; }
@@ -388,11 +257,6 @@
 </style>
 </head>
 <body>
-
-<!-- NAVBAR -->
-<nav class="navbar">
-  <img src="https://i.postimg.cc/mkSDvhVZ/1.png" alt="Maktab logosi" />
-</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -409,80 +273,6 @@
 
   <button class="btn-main" onclick="openModal()">📞 Ma'lumot olish</button>
 </section>
-
-<!-- WAVE -->
-<div class="wave-divider">
-  <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="width:100%;height:80px;display:block;">
-    <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/>
-  </svg>
-</div>
-
-<!-- WHY -->
-<section class="why">
-  <div class="section-label">✨ Nima uchun biz?</div>
-  <h2>Nega farzandingiz bizning sinfimizda o'qishi kerak?</h2>
-  <div class="cards">
-    <div class="card">
-      <span class="icon">📚</span>
-      <h3>Kuchli dastur</h3>
-      <p>O'qish, yozish, matematika va mantiqiy fikrlash — zamonaviy davlat standartlariga mos dastur.</p>
-    </div>
-    <div class="card">
-      <span class="icon">👩‍🏫</span>
-      <h3>Tajribali o'qituvchilar</h3>
-      <p>10+ yillik tajribaga ega, bolalarni sevadigan va individual yondashadigan mutaxassislar.</p>
-    </div>
-    <div class="card">
-      <span class="icon">🎨</span>
-      <h3>Ijodiy muhit</h3>
-      <p>O'yin orqali o'rganish metodi — bola maktabga ketishdan quvonadi, qo'rqmaydi.</p>
-    </div>
-    <div class="card">
-      <span class="icon">👨‍👩‍👧</span>
-      <h3>Ota-onalar bilan aloqa</h3>
-      <p>Har hafta hisobot, ota-onalar bilan yaqin hamkorlik va doimiy xabardorlik.</p>
-    </div>
-    <div class="card">
-      <span class="icon">🏆</span>
-      <h3>Natija kafolati</h3>
-      <p>O'quvchilarimizning 95% 1-sinfga yuqori tayyorgarlik bilan boradi.</p>
-    </div>
-    <div class="card">
-      <span class="icon">🕐</span>
-      <h3>Qulay kun tartibi</h3>
-      <p>Ertalab ishga ketayotganda bolangizni bizga topshiring — kechki payt qaytayotganda sog'-salomat, bilimli holda olib keting.</p>
-    </div>
-    <div class="card">
-      <span class="icon">🏇</span>
-      <h3>Sport to'garaklari</h3>
-      <p>Ot sporti, suzish, shaxmat — farzandingiz jismoniy va aqliy jihatdan har tomonlama rivojlanadi.</p>
-    </div>
-    <div class="card">
-      <span class="icon">🍽️</span>
-      <h3>3 mahal issiq ovqat</h3>
-      <p>Maxsus dietolog retsepti asosida tayyorlangan sog'lom va mazali ovqat — kun davomida to'liq oziqlanish.</p>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat"><span class="num">800+</span><div class="label">Ota-onalar Farg'onada bizni tanlashdi</div></div>
-    <div class="stat"><span class="num">12+</span><div class="label">Yillik tajriba</div></div>
-    <div class="stat"><span class="num">95%</span><div class="label">Muvaffaqiyat darajasi</div></div>
-    <div class="stat"><span class="num">20–22</span><div class="label">Guruhda o'quvchi soni</div></div>
-  </div>
-</section>
-
-<!-- FOOTER CTA -->
-<section class="footer-cta">
-  <h2>Bugun o'rningizni band qiling! 🎒</h2>
-  <p>O'rinlar cheklangan — kechiktirmang. Bepul maslahat uchun hoziroq bog'laning.</p>
-  <button class="btn-main" onclick="openModal()">📞 Ma'lumot olish</button>
-</section>
-
-<div class="footer">© 2026 Registon Xususiy Maktabi — Maktabga Tayyorlash Sinflari. Barcha huquqlar himoyalangan.</div>
 
 <!-- MODAL -->
 <div class="overlay" id="overlay" onclick="closeOnBg(event)">
@@ -539,7 +329,6 @@
   function setLoading(isLoading) {
     const btn = document.getElementById('submit-btn');
     const btnText = document.getElementById('btn-text');
-
     if (isLoading) {
       btn.classList.add('loading');
       btn.disabled = true;
@@ -560,7 +349,6 @@
     if (phone.length < 13) { err.textContent = "⚠️ Iltimos, to'liq telefon raqam kiriting."; return; }
     err.textContent = '';
 
-    // Immediately show loading state
     setLoading(true);
 
     try {
@@ -581,11 +369,9 @@
         document.body.appendChild(script);
       });
 
-      // Success
       document.getElementById('form-view').style.display = 'none';
       document.getElementById('success-view').style.display = 'block';
     } catch (e) {
-      // Error — restore button
       setLoading(false);
       err.textContent = "⚠️ Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.";
     }
